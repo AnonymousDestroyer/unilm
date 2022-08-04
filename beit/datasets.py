@@ -24,6 +24,10 @@ from masking_generator import MaskingGenerator
 from dataset_folder import ImageFolder
 
 
+train_data_path = 'D:\PycharmProjects\data\cub_image\images_train_test\images_train_test\\train'
+test_data_path = 'D:\PycharmProjects\data\cub_image\images_train_test\images_train_test\\test'
+
+
 class DataAugmentationForBEiT(object):
     def __init__(self, args):
         imagenet_default_mean_and_std = args.imagenet_default_mean_and_std
@@ -116,8 +120,16 @@ def build_dataset(is_train, args):
         dataset = ImageFolder(root, transform=transform)
         nb_classes = args.nb_classes
         assert len(dataset.class_to_idx) == nb_classes
+
+    elif args.data_set == "CUB":
+        root = train_data_path
+        dataset = datasets.ImageFolder(root,transform=transform)
+        nb_classes = 200
+
     else:
         raise NotImplementedError()
+    print(nb_classes,args.nb_classes)
+
     assert nb_classes == args.nb_classes
     print("Number of the class = %d" % args.nb_classes)
 

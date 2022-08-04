@@ -36,13 +36,16 @@ import modeling_finetune
 
 def get_args():
     parser = argparse.ArgumentParser('BEiT fine-tuning and evaluation script for image classification', add_help=False)
-    parser.add_argument('--batch_size', default=16, type=int)
+    parser.add_argument('--batch_size', default=4, type=int)
     parser.add_argument('--epochs', default=30, type=int)
     parser.add_argument('--update_freq', default=1, type=int)
     parser.add_argument('--save_ckpt_freq', default=5, type=int)
 
     # Model parameters
-    parser.add_argument('--model', default='beit_base_patch16_224', type=str, metavar='MODEL',
+    # parser.add_argument('--model', default='beit_base_patch16_224', type=str, metavar='MODEL',
+    #                     help='Name of model to train')
+
+    parser.add_argument('--model', default='beit_large_patch16_224', type=str, metavar='MODEL',
                         help='Name of model to train')
     parser.add_argument('--rel_pos_bias', action='store_true')
     parser.add_argument('--disable_rel_pos_bias', action='store_false', dest='rel_pos_bias')
@@ -137,7 +140,8 @@ def get_args():
                         help='How to apply mixup/cutmix params. Per "batch", "pair", or "elem"')
 
     # * Finetuning params
-    parser.add_argument('--finetune', default='',
+    ft_path = './pretrained_models/beit_large_patch16_224_pt22k_ft22k.pth'
+    parser.add_argument('--finetune', default=ft_path,
                         help='finetune from checkpoint')
     parser.add_argument('--model_key', default='model|module', type=str)
     parser.add_argument('--model_prefix', default='', type=str)
@@ -229,7 +233,6 @@ def main(args, ds_init):
     torch.manual_seed(seed)
     np.random.seed(seed)
     # random.seed(seed)
-
     cudnn.benchmark = True
 
     dataset_train, args.nb_classes = build_dataset(is_train=True, args=args)
@@ -265,7 +268,8 @@ def main(args, ds_init):
         log_writer = None
 
     data_loader_train = torch.utils.data.DataLoader(
-        dataset_train, sampler=sampler_train,
+        dataset_train,
+        sampler=sampler_train,
         batch_size=args.batch_size,
         num_workers=args.num_workers,
         pin_memory=args.pin_mem,
@@ -274,7 +278,8 @@ def main(args, ds_init):
 
     if dataset_val is not None:
         data_loader_val = torch.utils.data.DataLoader(
-            dataset_val, sampler=sampler_val,
+            dataset_val,
+            sampler=sampler_val,
             batch_size=int(1.5 * args.batch_size),
             num_workers=args.num_workers,
             pin_memory=args.pin_mem,
@@ -305,6 +310,8 @@ def main(args, ds_init):
         use_rel_pos_bias=args.rel_pos_bias,
         use_abs_pos_emb=args.abs_pos_emb,
         init_values=args.layer_scale_init_value,
+        # checkpoint_path='./pretrained_models/beit_large_patch16_224_pt22k_ft22k.pth'
+
     )
 
     patch_size = model.patch_embed.patch_size

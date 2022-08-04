@@ -19,8 +19,8 @@ import json
 import os
 
 from pathlib import Path
-
 from timm.models import create_model
+import collections.abc as container_abcs
 from optim_factory import create_optimizer
 
 from datasets import build_beit_pretraining_dataset
@@ -45,7 +45,7 @@ def get_args():
     parser.set_defaults(rel_pos_bias=True)
     parser.add_argument('--abs_pos_emb', action='store_true')
     parser.set_defaults(abs_pos_emb=False)
-    parser.add_argument('--layer_scale_init_value', default=0.1, type=float, 
+    parser.add_argument('--layer_scale_init_value', default=0.1, type=float,
                         help="0.1 for base, 1e-5 for large. set 0 to disable layer scale")
 
     parser.add_argument('--num_mask_patches', default=75, type=int,
