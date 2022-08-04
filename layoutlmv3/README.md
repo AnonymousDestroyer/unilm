@@ -23,11 +23,11 @@ pip install -e .
 |------------------|---------------------------------------------------------------------------------|
 | layoutlmv3-base  | [microsoft/layoutlmv3-base](https://huggingface.co/microsoft/layoutlmv3-base)   |
 | layoutlmv3-large | [microsoft/layoutlmv3-large](https://huggingface.co/microsoft/layoutlmv3-large) |
-
+| layoutlmv3-base-chinese | [microsoft/layoutlmv3-base-chinese](https://huggingface.co/microsoft/layoutlmv3-base-chinese) |
 
 ## Fine-tuning Examples
 We provide some fine-tuned models and their train/test logs.
-### Receipt Understanding on FUNSD
+### Form Understanding on FUNSD
 * Train
   ``` bash
   python -m torch.distributed.launch \
@@ -54,15 +54,15 @@ We provide some fine-tuned models and their train/test logs.
   ```
   | Model on FUNSD                                                                                              | precision | recall |    f1    |
   |-----------|:------------|:------:|:--------:|
-  | [HYPJUDY/layoutlmv3-base-finetuned-funsd](https://huggingface.co/HYPJUDY/layoutlmv3-base-finetuned-funsd)   |   0.8955  | 0.9165 |  0.9059  | 
-  | [HYPJUDY/layoutlmv3-large-finetuned-funsd](https://huggingface.co/HYPJUDY/layoutlmv3-large-finetuned-funsd) | 0.9219    | 0.9210 |  0.9215  | 
+  | [layoutlmv3-base-finetuned-funsd](https://huggingface.co/HYPJUDY/layoutlmv3-base-finetuned-funsd)   |   0.8955  | 0.9165 |  0.9059  | 
+  | [layoutlmv3-large-finetuned-funsd](https://huggingface.co/HYPJUDY/layoutlmv3-large-finetuned-funsd) | 0.9219    | 0.9210 |  0.9215  | 
 
-### Document Layout Detection on PubLayNet
+### Document Layout Analysis on PubLayNet
 Please follow [unilm/dit/object_detection](https://github.com/microsoft/unilm/blob/master/dit/object_detection/README.md) to prepare data and read more details about this task.
 In the folder of layoutlmv3/examples/object_detecion:
 * Train
 
-  Please firstly download the [pre-trained models](#Pre-trained Models) to `/path/to/microsoft/layoutlmv3-base`, then run:
+  Please firstly download the [pre-trained models](#pre-trained-models) to `/path/to/microsoft/layoutlmv3-base`, then run:
   ``` bash
   python train_net.py --config-file cascade_layoutlmv3.yaml --num-gpus 16 \
           MODEL.WEIGHTS /path/to/microsoft/layoutlmv3-base/pytorch_model.bin \
@@ -70,7 +70,7 @@ In the folder of layoutlmv3/examples/object_detecion:
   ```
 * Test 
 
-  If you want to test the [HYPJUDY/layoutlmv3-base-finetuned-publaynet](https://huggingface.co/HYPJUDY/layoutlmv3-base-finetuned-publaynet) model, please download it to `/path/to/layoutlmv3-base-finetuned-publaynet`, then run:
+  If you want to test the [layoutlmv3-base-finetuned-publaynet](https://huggingface.co/HYPJUDY/layoutlmv3-base-finetuned-publaynet) model, please download it to `/path/to/layoutlmv3-base-finetuned-publaynet`, then run:
   ``` bash
   python train_net.py --config-file cascade_layoutlmv3.yaml --eval-only --num-gpus 8 \
           MODEL.WEIGHTS /path/to/layoutlmv3-base-finetuned-publaynet/model_final.pth \
@@ -78,18 +78,67 @@ In the folder of layoutlmv3/examples/object_detecion:
   ```
   | Model on PubLayNet                                                                                                  | Text   | Title       |  List  | Table | Figure | Overall |
   |-------------------------------------------------------------------------------------------|:------------|:------:|:------:|-------|--------|---------|
-  | [HYPJUDY/layoutlmv3-base-finetuned-publaynet](https://huggingface.co/HYPJUDY/layoutlmv3-base-finetuned-publaynet) | 94.5        | 90.6 | 95.5 |  97.9     |  97.0      |   95.1      | 
+  | [layoutlmv3-base-finetuned-publaynet](https://huggingface.co/HYPJUDY/layoutlmv3-base-finetuned-publaynet) | 94.5        | 90.6 | 95.5 |  97.9     |  97.0      |   95.1      | 
+
+### Form Understanding on XFUND
+An example for the LayoutLMv3 Chinese model to train and evaluate model.
+#### Data Preparation
+Download the chinese data in XFUND from this [link](https://github.com/doc-analysis/XFUND/releases/tag/v1.0). 
+The resulting directory structure looks like the following:
+```
+│── data
+│   ├── zh.train.json
+│   ├── zh.val.json
+│   └── images
+│      ├── zh_train_*.jpg
+│      └── zh_val_*.jpg
+```
+* Train
+  ``` bash
+    python -m torch.distributed.launch \
+      --nproc_per_node=8 --master_port 4398 examples/run_xfund.py \
+      --data_dir data --language zh \
+      --do_train --do_eval \
+      --model_name_or_path microsoft/layoutlmv3-base-chinese \
+      --output_dir path/to/output \
+      --segment_level_layout 1 --visual_embed 1 --input_size 224 \
+      --max_steps 1000 --save_steps -1 --evaluation_strategy steps --eval_steps 20 \
+      --learning_rate 7e-5 --per_device_train_batch_size 2 --gradient_accumulation_steps 1 \
+      --dataloader_num_workers 8
+  ```
+
+* Test
+  ``` bash
+  python -m torch.distributed.launch \
+    --nproc_per_node=8 --master_port 4398 examples/run_xfund.py \
+    --data_dir data --language zh \
+    --do_eval \
+    --model_name_or_path path/to/model \
+    --output_dir /path/to/output \
+    --segment_level_layout 1 --visual_embed 1 --input_size 224 \
+    --dataloader_num_workers 8
+  ```
+  
+  | Pre-trained Model | precision | recall |    f1    |
+  |-----------|:------------|:------:|:--------:|
+  | [layoutlmv3-base-chinese](https://huggingface.co/microsoft/layoutlmv3-base-chinese)   |   0.8980  | 0.9435 |  0.9202  |  
+
+We also fine-tune the LayoutLMv3 Chinese model on [EPHOIE](https://github.com/HCIILAB/EPHOIE) for reference.
+  
+  | Pre-trained Model  | Subject | Test Time |    Name    | School | Examination Number | Seat Number | Class | Student Number | Grade | Score | **Mean** |        
+  |-----------------|:------------|:------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+  | [layoutlmv3-base-chinese](https://huggingface.co/microsoft/layoutlmv3-base-chinese)   |   98.99 | 100 | 99.77 | 99.2 | 100 | 100 | 98.82 | 99.78 | 98.31 | 97.27 | 99.21 |
+  
+
 
 ## Citation
 If you find LayoutLMv3 helpful, please cite us:
 ```
-@article{huang2022layoutlmv3,
-      title={LayoutLMv3: Pre-training for Document AI with Unified Text and Image Masking}, 
-      author={Yupan Huang and Tengchao Lv and Lei Cui and Yutong Lu and Furu Wei},
-      year={2022},
-      eprint={2204.08387},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+@inproceedings{huang2022layoutlmv3,
+  author={Yupan Huang and Tengchao Lv and Lei Cui and Yutong Lu and Furu Wei},
+  title={LayoutLMv3: Pre-training for Document AI with Unified Text and Image Masking},
+  booktitle={Proceedings of the 30th ACM International Conference on Multimedia},
+  year={2022}
 }
 ```
 
