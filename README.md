@@ -1,19 +1,29 @@
 <!--# Large-scale Self-supervised Pre-training Across Tasks, Languages, and Modalities-->
+## [aka.ms/nlpagi](https://aka.ms/nlpagi)
 # Hiring
-We are hiring at all levels (including FTE researchers and interns)! If you are interested in working with us on NLP and large-scale pre-trained models, please send your resume to <a href="mailto:fuwei@microsoft.com" class="x-hidden-focus">fuwei@microsoft.com</a>.
+We are hiring at all levels (including FTE researchers and interns)! If you are interested in working with us on Foundation Models (aka large-scale pre-trained models) and AGI, NLP, MT, Speech, Document AI and Multimodal AI, please send your resume to <a href="mailto:fuwei@microsoft.com" class="x-hidden-focus">fuwei@microsoft.com</a>.
 
-## AI Fundamentals
-### Foundation of Large Models
-**Transformers at Scale** = DeepNet + X-MoE
+## AGI Fundamentals
+### TorchScale - Transformers at (any) Scale ([repo](https://github.com/microsoft/torchscale))
+
+Fundamental research to improve modeling generality and capability, as well as training stability and efficiency for Transformers at any scale.
+
 > Stability - [**DeepNet**](https://github.com/microsoft/unilm/tree/master/deepnet): scaling Transformers to 1,000 Layers and beyond
 
->Efficiency & Transferability - [**X-MoE**](https://github.com/microsoft/unilm/tree/master/xmoe): scalable & finetunable sparse Mixture-of-Experts (MoE)
+> Generality - [**Foundation Transformers (Magneto)**](https://arxiv.org/abs/2210.06423): towards true general-purpose modeling across tasks and modalities (including language, vision, speech, and multimodal)
 
-## Foundation (aka Pre-trained) Models
+> Capability - A [**Length-Extrapolatable**](https://arxiv.org/abs/2212.10554) Transformer
+
+> Efficiency & Transferability - [**X-MoE**](https://github.com/microsoft/unilm/tree/master/xmoe): scalable & finetunable sparse Mixture-of-Experts (MoE)
+
+## Foundation Models
 
 ### General-purpose Foundation Model
 > [**MetaLM**](https://github.com/microsoft/unilm/tree/master/metalm): **Language Models are General-Purpose Interfaces**
 
+
+### LLM / MLLM (Multimodal LLM)
+> [**Kosmos-1**](https://arxiv.org/abs/2302.14045): **A Multimodal Large Language Model (MLLM)**
 
 
 **The Big Convergence** - Large-scale self-supervised pre-training across ```tasks``` (predictive and generative), ```languages``` (100+ languages), and ```modalities``` (language, image, audio, layout/format + language, vision + language, audio + language, etc.)
@@ -33,22 +43,28 @@ We are hiring at all levels (including FTE researchers and interns)! If you are 
 
 > [**EdgeLM**](https://github.com/microsoft/unilm/tree/master/edgelm)(```NEW```): small pre-trained models on edge/client devices
 
-> [**SimLM**](https://github.com/microsoft/unilm/tree/master/simlm) (```NEW```): similarity matching with language model pre-training
+> [**SimLM**](https://github.com/microsoft/unilm/tree/master/simlm) (```NEW```): large-scale pre-training for similarity matching
+
+> [**E5**](https://github.com/microsoft/unilm/tree/master/e5) (```NEW```): text embeddings
 
 ### Vision
-> [**BEiT**](https://github.com/microsoft/unilm/tree/master/beit): generative self-supervised pre-training for vision / BERT Pre-Training of Image Transformers
+> [**BEiT**](https://github.com/microsoft/unilm/tree/master/beit)/[**BEiT-2**](https://github.com/microsoft/unilm/tree/master/beit2): generative self-supervised pre-training for vision / BERT Pre-Training of Image Transformers
 
 > [**DiT**](https://github.com/microsoft/unilm/tree/master/dit) (```NEW```): self-supervised pre-training for Document Image Transformers
 
 ### Speech
 > [**WavLM**](https://github.com/microsoft/unilm/tree/master/wavlm): speech pre-training for full stack tasks
 
-### Multimodal (X + Language)
-> [**LayoutLM**](https://github.com/microsoft/unilm/tree/master/layoutlm)/[**LayoutLMv2**](https://github.com/microsoft/unilm/tree/master/layoutlmv2)/[**LayoutLMv3**](https://github.com/microsoft/unilm/tree/master/layoutlmv3): multimodal (text + layout/format + image) pre-training for [Document AI](https://www.microsoft.com/en-us/research/project/document-ai/) (e.g. scanned documents, PDF, etc.)
+> [**VALL-E**](https://github.com/microsoft/unilm/tree/master/valle): a neural codec language model for TTS
 
-> [**LayoutXLM**](https://github.com/microsoft/unilm/tree/master/layoutxlm): multimodal (text + layout/format + image) pre-training for multilingual document understanding
+### Multimodal (X + Language)
+> [**LayoutLM**](https://github.com/microsoft/unilm/tree/master/layoutlm)/[**LayoutLMv2**](https://github.com/microsoft/unilm/tree/master/layoutlmv2)/[**LayoutLMv3**](https://github.com/microsoft/unilm/tree/master/layoutlmv3): multimodal (text + layout/format + image) **Document Foundation Model** for [Document AI](https://www.microsoft.com/en-us/research/project/document-ai/) (e.g. scanned documents, PDF, etc.)
+
+> [**LayoutXLM**](https://github.com/microsoft/unilm/tree/master/layoutxlm): multimodal (text + layout/format + image) **Document Foundation Model** for multilingual Document AI
 
 > [**MarkupLM**](https://github.com/microsoft/unilm/tree/master/markuplm): markup language model pre-training for visually-rich document understanding
+
+> [**XDoc**](https://github.com/microsoft/unilm/tree/master/xdoc): unified pre-training for cross-format document understanding
 
 > [**UniSpeech**](https://arxiv.org/abs/2101.07597): unified pre-training for self-supervised learning and supervised learning for ASR
 
@@ -56,10 +72,13 @@ We are hiring at all levels (including FTE researchers and interns)! If you are 
 
 > [**SpeechT5**](https://arxiv.org/abs/2110.07205): encoder-decoder pre-training for spoken language processing
 
+> [**SpeechLM**](https://arxiv.org/abs/2209.15329): Enhanced Speech Pre-Training with Unpaired Textual Data
+
 > [**VLMo**](https://github.com/microsoft/unilm/tree/master/vlmo): Unified vision-language pre-training 
 
 > [**VL-BEiT**](https://github.com/microsoft/unilm/tree/master/vl-beit) (```NEW```): Generative Vision-Language Pre-training - evolution of **BEiT** to multimodal
 
+> [**BEiT-3**](https://github.com/microsoft/unilm/tree/master/beit3) (```NEW```): a general-purpose multimodal foundation model, and a major milestone of **The Big Convergence** of Large-scale Pre-training Across Tasks, Languages, and Modalities.
 ### Toolkits
 > [**s2s-ft**](https://github.com/microsoft/unilm/tree/master/s2s-ft): sequence-to-sequence fine-tuning toolkit
 
@@ -72,10 +91,22 @@ We are hiring at all levels (including FTE researchers and interns)! If you are 
 
 > [**XLM-T**](https://github.com/microsoft/unilm/tree/master/xlmt): multilingual NMT w/ pretrained cross-lingual encoders
 
+## Links
+### LLMOps - General technology for enabling AI capabilities w/ LLMs and MLLMs ([repo](https://github.com/microsoft/lmops))
 
 ## News
+- [Model Release] March, 2023: [**BEiT-3**](https://github.com/microsoft/unilm/tree/master/beit3) pretrained models and code.
+- March, 2023: [**Kosmos-1**](https://arxiv.org/abs/2302.14045) - a Multimodal Large Language Model (MLLM) that can perceive general modalities, learn in context (i.e., few-shot), and follow instructions (i.e., zero-shot).
+- January, 2023: [**VALL-E**](https://arxiv.org/abs/2301.02111) a language modeling approach for text to speech synthesis (TTS), which achieves state-of-the-art zero-shot TTS performance. See https://aka.ms/valle for demos of our work.
+- [Model Release] January, 2023: [**E5**](https://github.com/microsoft/unilm/tree/master/e5) - Text Embeddings by Weakly-Supervised Contrastive Pre-training.
+- November, 2022: [**TorchScale 0.1.1**](https://github.com/microsoft/torchscale) was released!
+- November, 2022: [**TrOCR**](https://arxiv.org/abs/2109.10282) was accepted by AAAI 2023.
+- [Model Release] November, 2022: [**XDoc**](https://github.com/microsoft/unilm/tree/master/xdoc) **BASE** models for cross-format document understanding.
+- [Model Release] September, 2022: [**TrOCR**](https://github.com/microsoft/unilm/tree/master/trocr) **BASE** and **LARGE** models for Scene Text Recognition (STR).
+- [Model Release] September, 2022: [**BEiT v2**](https://github.com/microsoft/unilm/tree/master/beit2) code and pretrained models.
+- August, 2022: [**BEiT-3**](https://arxiv.org/abs/2208.10442) - a general-purpose multimodal foundation model, which achieves state-of-the-art transfer performance on both vision and vision-language tasks
 - July, 2022: [**SimLM**](https://github.com/microsoft/unilm/tree/master/simlm) - Large-scale self-supervised pre-training for similarity matching
-- June, 2022: [**DiT**](https://arxiv.org/abs/2203.02378) and [**LayoutLMv3**](https://arxiv.org/abs/2204.08387) were accepted by ACM Multimedia 2022
+- June, 2022: [**DiT**](https://arxiv.org/abs/2203.02378) and [**LayoutLMv3**](https://arxiv.org/abs/2204.08387) were accepted by ACM Multimedia 2022.
 - June, 2022: [**MetaLM**](https://github.com/microsoft/unilm/tree/master/metalm) - Language models are general-purpose interfaces to foudation models (language/multilingual, vision, speech, and multimodal)
 - June, 2022: [**VL-BEiT**](https://github.com/microsoft/unilm/tree/master/vl-beit) - bidirectional multimodal Transformer learned from scratch with one unified pretraining task, one shared backbone, and one-stage training, supporting both vision and vision-language tasks.
 - [Model Release] June, 2022: [**LayoutLMv3 Chinese**](https://github.com/microsoft/unilm/tree/master/layoutlmv3#form-understanding-on-xfund) - Chinese version of LayoutLMv3
@@ -84,7 +115,7 @@ We are hiring at all levels (including FTE researchers and interns)! If you are 
 - [Model Release] April, 2022: [**LayoutLMv3**](https://github.com/microsoft/unilm/tree/master/layoutlmv3) - Pre-training for Document AI with Unified Text and Image Masking
 - [Model Release] March, 2022: [**EdgeFormer**](https://github.com/microsoft/unilm/tree/master/edgelm) - Parameter-efficient Transformer for On-device Seq2seq Generation
 - [Model Release] March, 2022: [**DiT**](https://github.com/microsoft/unilm/tree/master/dit) - Self-supervised Document Image Transformer. Demos: [Document Layout Analysis](https://huggingface.co/spaces/nielsr/dit-document-layout-analysis), [Document Image Classification](https://huggingface.co/spaces/microsoft/document-image-transformer)
-- Januray, 2022: [**BEiT**](https://openreview.net/forum?id=p-BhZSz59o4) was accepted by **ICLR 2022 as Oral presentation** (54 out of 3391).
+- January, 2022: [**BEiT**](https://openreview.net/forum?id=p-BhZSz59o4) was accepted by **ICLR 2022 as Oral presentation** (54 out of 3391).
 - [Model Release] December 16th, 2021: [**TrOCR**](https://github.com/microsoft/unilm/tree/master/trocr) **small** models for handwritten and printed texts, with 3x inference speedup.
 - November 24th, 2021: [**VLMo**](https://github.com/microsoft/unilm/tree/master/vlmo) as the new SOTA on the [VQA Challenge](https://eval.ai/web/challenges/challenge-page/830/leaderboard/2278)
 - November, 2021: [Multilingual translation at scale: 10000 language pairs and beyond](https://www.microsoft.com/en-us/translator/blog/2021/11/22/multilingual-translation-at-scale-10000-language-pairs-and-beyond/)
@@ -113,7 +144,12 @@ We are hiring at all levels (including FTE researchers and interns)! If you are 
 - April 5, 2020: [**Multilingual MiniLM**](https://github.com/microsoft/unilm/tree/master/minilm) released!
 - September, 2019: [UniLMv1](https://github.com/microsoft/unilm/tree/master/unilm-v1) was accepted by NeurIPS 2019.
 
+<!--
 ## Release
+
+**\*\*\*\*\* ```New October, 2022```: [XDoc](https://github.com/microsoft/unilm/tree/master/xdoc) release \*\*\*\*\***
+
+- [x] [**XDoc**](https://github.com/microsoft/unilm/tree/master/xdoc) (October 7, 2022): XDoc, a unified pre-trained model which deals with different document formats in a single model. For parameter efficiency, we share backbone parameters for different formats such as the word embedding layer and the Transformer layers. Meanwhile, we introduce adaptive layers with lightweight parameters to enhance the distinction across different formats. Experimental results have demonstrated that with only 36.7% parameters, XDoc achieves comparable or even better performance on a variety of downstream tasks compared with the individual pre-trained models, which is cost effective for real-world deployment. "[XDoc: Unified Pre-training for Cross-Format Document Understanding](https://arxiv.org/abs/2210.02849) ```EMNLP 2022```"
 
 **\*\*\*\*\* ```New May, 2022```: [Aggressive Decoding](https://github.com/microsoft/unilm/tree/master/decoding) release \*\*\*\*\***
 
@@ -144,7 +180,7 @@ WavLM integrates the gated relative position embedding structure and the utteran
 
 **\*\*\*\*\* ```September, 2021```: [TrOCR](https://github.com/microsoft/unilm/tree/master/trocr) release \*\*\*\*\***
 
-- [x] [**TrOCR**](https://github.com/microsoft/unilm/tree/master/trocr) (September 22, 2021): Transformer-based OCR with pre-trained models, which leverages the Transformer architecture for both image understanding and bpe-level text generation. The TrOCR model is simple but effective (convolution free), and can be pre-trained with large-scale synthetic data and fine-tuned with human-labeled datasets. "[TrOCR: Transformer-based Optical Character Recognition with Pre-trained Models](https://arxiv.org/abs/2109.10282)"
+- [x] [**TrOCR**](https://github.com/microsoft/unilm/tree/master/trocr) (September 22, 2021): Transformer-based OCR with pre-trained models, which leverages the Transformer architecture for both image understanding and bpe-level text generation. The TrOCR model is simple but effective (convolution free), and can be pre-trained with large-scale synthetic data and fine-tuned with human-labeled datasets. "[TrOCR: Transformer-based Optical Character Recognition with Pre-trained Models](https://arxiv.org/abs/2109.10282) ```AAAI 2023```"
 
 **\*\*\*\*\* ```August, 2021```: [LayoutReader](https://github.com/microsoft/unilm/tree/master/layoutreader) release \*\*\*\*\***
 
@@ -182,6 +218,8 @@ WavLM integrates the gated relative position embedding structure and the utteran
 **\*\*\*\*\* October 1st, 2019: UniLM v1 release \*\*\*\*\***
 
 - [x] [**UniLM v1**](https://github.com/microsoft/unilm/tree/master/unilm-v1) (September 30, 2019): the code and pre-trained models for the ```NeurIPS 2019``` paper entitled "[Unified Language Model Pre-training for Natural Language Understanding and Generation](https://arxiv.org/abs/1905.03197)". UniLM (v1) achieves the **new SOTA results** in **NLG** (especially **sequence-to-sequence generation**) tasks, including abstractive summarization (the Gigaword and CNN/DM datasets), question generation (the SQuAD QG dataset), etc. 
+
+-->
 
 ## License
 This project is licensed under the license found in the LICENSE file in the root directory of this source tree.
